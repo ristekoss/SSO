@@ -1,5 +1,22 @@
 {
+  "name": "bobbypriambodo/sso",
+  "type": "library",
+  "description": "Utility library for authentication with SSO-UI",
+  "keywords": ["authentication"],
+  "homepage": "http://github.com/bobbypriambodo/sso",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Bobby Priambodo",
+      "email": "bobby.priambodo@gmail.com",
+      "homepage": "http://bobbypriambodo.com"
+    }
+  ],
   "require": {
+    "php": ">=5.3",
     "jasig/phpcas": "*"
+  },
+  "autoload": {
+    "psr-0": { "SSO": "src/"}
   }
 }
