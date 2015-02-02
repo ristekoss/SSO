@@ -1,9 +1,9 @@
 {
-  "name": "bobbypriambodo/sso",
+  "name": "ristek/sso",
   "type": "library",
   "description": "Utility library for authentication with SSO-UI",
   "keywords": ["authentication"],
-  "homepage": "http://github.com/bobbypriambodo/sso",
+  "homepage": "http://github.com/RistekCSUI/SSO",
   "license": "MIT",
   "authors": [
     {
