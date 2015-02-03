@@ -63,18 +63,14 @@ define('CAS_SERVER_PORT', 443);
  */
 class SSO
 {
-  /**
-   * Constructor
-   * @param $cas_path The path to the CAS.php. Use only when not installing via composer.
-   */
-  public function __construct($cas_path = false) {
-    // Require CAS.php only if path is provided
-    if ($cas_path)
-      require $cas_path;
 
+  /**
+   * phpCAS Initialization.
+   */
+  private static function init() {
     // Create phpCAS client
     phpCAS::client(CAS_VERSION_2_0, CAS_SERVER_HOST, CAS_SERVER_PORT, CAS_SERVER_URI);
-
+    
     // Set no validation.
     phpCAS::setNoCasServerValidation();
   }
@@ -84,51 +80,42 @@ class SSO
    *
    * @return bool Authentication
    */
-  public function authenticate() {
+  public static function authenticate() {
+    self::init();
     return phpCAS::forceAuthentication();
   }
 
   /**
    * Logout from SSO.
    */
-  public function logout() {
+  public static function logout() {
     phpCAS::logout();
   }
 
   /**
-   * Returns user's name.
+   * Returns the authenticated user.
    *
-   * @return string Name
+   * @return Object User
    */
-  public function getName() {
-    return phpCAS::getAttribute('nama');
+  public static function getUser() {
+    $details = phpCAS::getAttributes();
+    
+    // Create new user object, initially empty.
+    $user = new \stdClass();
+    $user->name = $details['nama'];
+    $user->npm = $details['npm'];
+    $user->role = $details['peran_user'];
+
+    return $user;
   }
 
   /**
-   * Returns user's ID (NPM).
+   * Sets the path to CAS.php. Use only when not installing via Composer.
    *
-   * @return string NPM
+   * @param strin $cas_path Path to CAS.php
    */
-  public function getNPM() {
-    return phpCAS::getAttribute('npm');
-  }
-
-  /**
-   * Returns user's role.
-   *
-   * @return string Role
-   */
-  public function getRole() {
-    return phpCAS::getAttribute('peran_user');
-  }
-
-  /**
-   * Returns all of user's attributes available.
-   *
-   * @return array Attributes
-   */
-  public function getAttributes() {
-    return phpCAS::getAttributes();
+  public static function setCASPath($cas_path) {
+    require $cas_path;
   }
 
 }
