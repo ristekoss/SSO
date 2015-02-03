@@ -12,15 +12,20 @@ Untuk meng-*install* *library* ini, ikuti langkah berikut.
 
 1. *Install* Composer. ([Lihat caranya](https://getcomposer.org/doc/00-intro.md))
 2. Tambahkan dependensi berikut ke file composer.json yang ada di *root* project Anda (atau buat baru jika belum ada).
+        
         {
             "require": {
                 "ristek/sso": "*"
             }
         }
+
 3. *Install* library ini dengan menjalankan perintah berikut pada terminal:
+
         composer install
+
     Langkah ini dapat memakan waktu beberapa menit tergantung koneksi Anda.
 4. *Require* autoload.php dari composer di file Anda (lewati langkah ini jika Anda menggunakan framework berbasis Composer, misalnya Laravel):
+        
         <?php
             require "vendor/autoload.php";
 
@@ -30,12 +35,15 @@ Anda sekarang sudah dapat menggunakan library ini.
 
 Untuk menggunakan *library* ini secara manual (tanpa Composer), ikuti langkah berikut.
 
-1. Download *library* phpCAS dari [sini](#) dan ekstrak ke suatu tempat di project Anda, misalnya pada direktori `vendor`.
+1. Download *library* phpCAS dari [sini](http://downloads.jasig.org/cas-clients/php/current.tgz) dan ekstrak ke suatu tempat di project Anda, misalnya pada direktori `vendor`.
 2. Download project ini sebagai zip (lihat bagian atas kanan halaman ini), ekstrak juga ke `vendor`.
 3. *Require* `SSO.php` dengan melakukan:
+        
         <?php
             require "lib/SSO/SSO.php";
+
 4. Anda kemudian harus spesifikasikan *path* ke `CAS.php` (ada di library phpCAS yang Anda download di langkah 1), seperti ini:
+        
         <?php
             $cas_path = "/path/to/CAS.php";
             SSO\SSO::setCASPath($cas_path);
