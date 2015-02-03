@@ -3,13 +3,10 @@
 // Include the dependencies
 require 'vendor/autoload.php';
 
-// Instantiate a new SSO object
-$sso = new SSO\SSO();
-
 // Authenticate the user
-$auth = $sso->authenticate();
+SSO\SSO::authenticate();
 
-// If authentication succeeded, $auth will equal to true.
-if ($auth) {
-  echo $sso->getName() . ' ' . $sso->getNPM();
-}
+// At this point, the authentication has succeeded.
+// This shows how to get the user details.
+$user = SSO\SSO::getUser();
+echo $user->name . ' ' . $user->npm . ' ' . $user->role;

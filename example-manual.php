@@ -3,16 +3,16 @@
 // Require the required files.
 require 'SSO/SSO.php';
 
-// Path to CAS.php, change this to the suitable location.
+// Path to CAS.php, make sure to change this to the suitable location.
 $cas_path = dirname(__FILE__).'/vendor/jasig/phpcas/CAS.php';
 
-// Instantiate a new SSO object with the given $cas_path
-$sso = new SSO\SSO($cas_path);
+// Set the CAS path.
+SSO\SSO::setCASPath($cas_path);
 
 // Authenticate the user
-$auth = $sso->authenticate();
+SSO\SSO::authenticate();
 
-// If authentication succeeded, $auth will equal to true.
-if ($auth) {
-  echo $sso->getName() . ' ' . $sso->getNPM();
-}
+// At this point, the authentication has succeeded.
+// This shows how to get the user details.
+$user = SSO\SSO::getUser();
+echo $user->name . ' ' . $user->npm . ' ' . $user->role;
