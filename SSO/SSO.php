@@ -5,7 +5,6 @@
  * @author      Bobby Priambodo <bobby.priambodo@gmail.com>
  * @copyright   2015 Bobby Priambodo
  * @license     MIT
- * @version     1.0.0
  * @package     SSO
  *
  * MIT LICENSE
