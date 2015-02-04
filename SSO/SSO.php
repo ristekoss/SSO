@@ -103,6 +103,7 @@ class SSO
     
     // Create new user object, initially empty.
     $user = new \stdClass();
+    $user->username = phpCAS::getUser();
     $user->name = $details['nama'];
     $user->npm = $details['npm'];
     $user->role = $details['peran_user'];
