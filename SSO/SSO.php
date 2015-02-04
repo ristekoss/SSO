@@ -89,6 +89,7 @@ class SSO
    * Logout from SSO.
    */
   public static function logout() {
+    self::init();
     phpCAS::logout();
   }
 
