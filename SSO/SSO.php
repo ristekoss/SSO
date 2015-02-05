@@ -51,6 +51,20 @@ define('CAS_SERVER_URI', '/cas2');
  */
 define('CAS_SERVER_PORT', 443);
 
+// ------------------------------------------------------------------------
+//  CAS Initialization
+// ------------------------------------------------------------------------
+
+/**
+ * Create phpCAS client
+ */
+phpCAS::client(CAS_VERSION_2_0, CAS_SERVER_HOST, CAS_SERVER_PORT, CAS_SERVER_URI);
+
+/**
+ * Set no validation.
+ */
+phpCAS::setNoCasServerValidation();
+
 /**
  * The SSO class is a simple phpCAS interface for authenticating using
  * SSO-UI CAS service.
@@ -65,31 +79,27 @@ class SSO
 {
 
   /**
-   * phpCAS Initialization.
-   */
-  private static function init() {
-    // Create phpCAS client
-    phpCAS::client(CAS_VERSION_2_0, CAS_SERVER_HOST, CAS_SERVER_PORT, CAS_SERVER_URI);
-    
-    // Set no validation.
-    phpCAS::setNoCasServerValidation();
-  }
-
-  /**
    * Authenticate the user.
    *
    * @return bool Authentication
    */
   public static function authenticate() {
-    self::init();
     return phpCAS::forceAuthentication();
+  }
+
+  /**
+   * Check if the user is already authenticated.
+   *
+   * @return bool Authentication
+   */
+  public static function check() {
+    return phpCAS::checkAuthentication();
   }
 
   /**
    * Logout from SSO.
    */
   public static function logout() {
-    self::init();
     phpCAS::logout();
   }
 
