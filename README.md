@@ -40,12 +40,12 @@ Untuk menggunakan *library* ini secara manual (tanpa Composer), ikuti langkah be
 3. *Require* `SSO.php` dengan melakukan:
         
         <?php
-            require "lib/SSO/SSO.php";
+            require "vendor/SSO/SSO.php";
 
 4. Anda kemudian harus spesifikasikan *path* ke `CAS.php` (ada di library phpCAS yang Anda download di langkah 1), seperti ini:
         
         <?php
-            $cas_path = "/path/to/CAS.php";
+            $cas_path = "path/to/CAS.php";
             SSO\SSO::setCASPath($cas_path);
 
 Sekarang *library* ini sudah dapat digunakan.
