@@ -67,17 +67,24 @@ Pemanggilan ini akan melakukan *redirect* browser ke login SSO. Jika otentikasi 
 Fungsi `getUser()` akan mengembalikan sebuah object `stdClass` PHP yang memiliki detail dari user yang berhasil diotentikasi. Potongan kode berikut mengilustrasikan penggunaannya:
 
     $user = SSO\SSO::getUser();
+    echo $user->username;           // prints user's username
     echo $user->name;               // prints user's name
     echo $user->npm;                // prints user's npm
     echo $user->role;               // prints user's role
 
-### 3. Log Out
+### 3. Memeriksa otentikasi
+
+    SSO\SSO::check();
+
+Pemanggilan ini akan mengembalikan true jika user sudah pernah berhasil otentikasi dan false jika sebaliknya.
+
+### 4. Log Out
 
     SSO\SSO::logout();
 
 Pemanggilan ini akan mengakhiri otentikasi user.
 
-### 4. Setting path untuk CAS.php
+### 5. Setting path untuk CAS.php
 
     SSO\SSO::setCASPath($cas_path);
 
@@ -94,8 +101,3 @@ Setelah itu Anda akan dapat menghilangkan awalan `SSO\`, seperti ini:
     SSO::authenticate();
     $user = SSO::getUser();
 
-## Tutorial
-
-[Coming soon]
-
-P.S. Kami sedang membuat tutorial integrasi library ini untuk beberapa framework seperti CodeIgniter dan Laravel. Stay tuned!
