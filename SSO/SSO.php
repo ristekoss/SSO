@@ -55,15 +55,18 @@ define('CAS_SERVER_PORT', 443);
 //  CAS Initialization
 // ------------------------------------------------------------------------
 
-/**
- * Create phpCAS client
- */
-phpCAS::client(CAS_VERSION_2_0, CAS_SERVER_HOST, CAS_SERVER_PORT, CAS_SERVER_URI);
+// ONLY DO THIS IF phpCAS EXISTS (i.e. installing via Composer). Thanks to Fariskhi for noticing the bug.
+if (class_exists('phpCAS')) {
+  /**
+   * Create phpCAS client
+   */
+  phpCAS::client(CAS_VERSION_2_0, CAS_SERVER_HOST, CAS_SERVER_PORT, CAS_SERVER_URI);
 
-/**
- * Set no validation.
- */
-phpCAS::setNoCasServerValidation();
+  /**
+   * Set no validation.
+   */
+  phpCAS::setNoCasServerValidation();
+}
 
 /**
  * The SSO class is a simple phpCAS interface for authenticating using
@@ -121,13 +124,31 @@ class SSO
     return $user;
   }
 
+  // ----------------------------------------------------------
+  // Manual Installation Stuff
+  // ----------------------------------------------------------
+
   /**
    * Sets the path to CAS.php. Use only when not installing via Composer.
    *
-   * @param strin $cas_path Path to CAS.php
+   * @param string $cas_path Path to CAS.php
    */
   public static function setCASPath($cas_path) {
     require $cas_path;
+
+    // Initialize CAS client.
+    self::init();
+  }
+
+  /**
+   * Initialize CAS client. Called by setCASPath().
+   */
+  private static function init() {
+    // Create CAS client.
+    phpCAS::client(CAS_VERSION_2_0, CAS_SERVER_HOST, CAS_SERVER_PORT, CAS_SERVER_URI);
+
+    // Set no validation.
+    phpCAS::setNoCasServerValidation();
   }
 
 }
