@@ -113,13 +113,14 @@ class SSO
    */
   public static function getUser() {
     $details = phpCAS::getAttributes();
-    
+
     // Create new user object, initially empty.
     $user = new \stdClass();
     $user->username = phpCAS::getUser();
     $user->name = $details['nama'];
     $user->npm = $details['npm'];
     $user->role = $details['peran_user'];
+    $user->org_code = $details['kd_org'];
 
     return $user;
   }

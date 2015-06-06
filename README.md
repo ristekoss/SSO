@@ -71,6 +71,7 @@ Fungsi `getUser()` akan mengembalikan sebuah object `stdClass` PHP yang memiliki
     echo $user->name;               // prints user's name
     echo $user->npm;                // prints user's npm
     echo $user->role;               // prints user's role
+    echo $user->org_code;           // prints user's organization code
 
 ### 3. Memeriksa otentikasi
 
