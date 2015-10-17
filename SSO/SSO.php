@@ -122,6 +122,13 @@ class SSO
     $user->role = $details['peran_user'];
     $user->org_code = $details['kd_org'];
 
+    $datas = file_get_contents('http://kawung.mhs.cs.ui.ac.id/~muhammad.gilang41/plugin-sso/get-json.php?org-code=' . $user->org_code);
+    $datas = json_decode($datas, true);
+
+    $user->faculty = $datas['faculty'];
+    $user->study_program = $datas['study-program'];
+    $user->educational_program = $datas['educational-program'];
+    
     return $user;
   }
 

@@ -67,11 +67,14 @@ Pemanggilan ini akan melakukan *redirect* browser ke login SSO. Jika otentikasi 
 Fungsi `getUser()` akan mengembalikan sebuah object `stdClass` PHP yang memiliki detail dari user yang berhasil diotentikasi. Potongan kode berikut mengilustrasikan penggunaannya:
 
     $user = SSO\SSO::getUser();
-    echo $user->username;           // prints user's username
-    echo $user->name;               // prints user's name
-    echo $user->npm;                // prints user's npm
-    echo $user->role;               // prints user's role
-    echo $user->org_code;           // prints user's organization code
+    echo $user->username;             // prints user's username
+    echo $user->name;                 // prints user's name
+    echo $user->npm;                  // prints user's npm
+    echo $user->role;                 // prints user's role
+    echo $user->org_code;             // prints user's organization code
+    echo $user->faculty;              // prints user's faculty
+    echo $user->study_program;        // prints user's study program
+    echo $user->educational_program;  // prints user's educational program
 
 ### 3. Memeriksa otentikasi
 
