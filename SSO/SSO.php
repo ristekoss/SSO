@@ -122,14 +122,40 @@ class SSO
     $user->role = $details['peran_user'];
     $user->org_code = $details['kd_org'];
 
-    $datas = file_get_contents('http://kawung.mhs.cs.ui.ac.id/~muhammad.gilang41/plugin-sso/get-json.php?org-code=' . $user->org_code);
-    $datas = json_decode($datas, true);
-
+    $datas = self::getAdditionalInfo($user->org_code);
     $user->faculty = $datas['faculty'];
     $user->study_program = $datas['study-program'];
     $user->educational_program = $datas['educational-program'];
     
     return $user;
+  }
+
+  /**
+   * Get faculty, study program, and educational program from org_code. This method
+   * scraping from http://dialog.ui.ac.id/ to get relevant info.
+   *
+   * @param string $org_code From self::getUser()->org_code
+   * @return Array Results
+   */
+  public static function getAdditionalInfo($org_code) {
+    $dom = new \DOMDocument;
+
+    // get html code from dialog.ui.ac.id and ignore some error
+    @$dom->loadHTML(file_get_contents("http://dialog.ui.ac.id/id/browse/detil/" . $org_code));
+
+    $results = [];
+    $content = $dom->getElementsByTagName('table')->item(0);
+
+    // get faculty
+    $results['faculty'] = trim($content->childNodes->item(0)->childNodes->item(2)->nodeValue);
+
+    // get study program
+    $results['study-program'] = trim($content->childNodes->item(5)->childNodes->item(2)->nodeValue);
+
+    // get educational program like "S1 Reguler (Undergraduate Program)" and others
+    $results['educational-program'] = trim($content->childNodes->item(4)->childNodes->item(2)->nodeValue);
+
+    return $results;
   }
 
   // ----------------------------------------------------------
