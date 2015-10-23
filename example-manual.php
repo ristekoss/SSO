@@ -15,4 +15,4 @@ SSO\SSO::authenticate();
 // At this point, the authentication has succeeded.
 // This shows how to get the user details.
 $user = SSO\SSO::getUser();
-echo $user->name . ' ' . $user->npm . ' ' . $user->role;
+echo $user->name . ' ' . $user->npm . ' ' . $user->role . ' ' . $user->faculty . ' ' . $user->study_program . ' ' . $user->educational_program;
