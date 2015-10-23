@@ -122,7 +122,7 @@ class SSO
     $user->role = $details['peran_user'];
     $user->org_code = $details['kd_org'];
 
-    $datas = json_decode(file_get_contents('http://mgilangjanuar.github.io/SSO/additional-info.json'), true)[$user->org_code];
+    $datas = json_decode(file_get_contents( __DIR__ . '/additional-info.json'), true)[$user->org_code];
     $user->faculty = $datas['faculty'];
     $user->study_program = $datas['study_program'];
     $user->educational_program = $datas['educational_program'];
