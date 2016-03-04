@@ -118,14 +118,20 @@ class SSO
     $user = new \stdClass();
     $user->username = phpCAS::getUser();
     $user->name = $details['nama'];
-    $user->npm = $details['npm'];
     $user->role = $details['peran_user'];
-    $user->org_code = $details['kd_org'];
 
-    $data = json_decode(file_get_contents( __DIR__ . '/additional-info.json'), true)[$user->org_code];
-    $user->faculty = $data['faculty'];
-    $user->study_program = $data['study_program'];
-    $user->educational_program = $data['educational_program'];
+    if ($user->role === 'mahasiswa') {
+      $user->npm = $details['npm'];
+      $user->org_code = $details['kd_org'];
+
+      $data = json_decode(file_get_contents( __DIR__ . '/additional-info.json'), true)[$user->org_code];
+      $user->faculty = $data['faculty'];
+      $user->study_program = $data['study_program'];
+      $user->educational_program = $data['educational_program'];
+    }
+    else if ($user->role === 'staff') {
+      $user->nip = $details['nip'];
+    }
 
     return $user;
   }
