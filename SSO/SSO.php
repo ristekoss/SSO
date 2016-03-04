@@ -120,7 +120,7 @@ class SSO
     $user->name = $details['nama'];
     $user->role = $details['peran_user'];
 
-    if ($user->role == 'mahasiswa') {
+    if ($user->role === 'mahasiswa') {
       $user->npm = $details['npm'];
       $user->org_code = $details['kd_org'];
 
@@ -129,7 +129,7 @@ class SSO
       $user->study_program = $data['study_program'];
       $user->educational_program = $data['educational_program'];
     }
-    else if ($user->role == 'staff') {
+    else if ($user->role === 'staff') {
       $user->nip = $details['nip'];
     }
 
