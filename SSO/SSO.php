@@ -100,10 +100,13 @@ class SSO
   }
 
   /**
-   * Logout from SSO.
+   * Logout from SSO with URL redirection options
    */
-  public static function logout() {
-    phpCAS::logout();
+  public static function logout($url='') {
+    if ($url === '')
+      phpCAS::logout();
+    else
+      phpCAS::logout(['url' => $url]);
   }
 
   /**
