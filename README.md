@@ -91,7 +91,9 @@ Pemanggilan ini akan mengembalikan true jika user sudah pernah berhasil otentika
 
     SSO\SSO::logout();
 
-Pemanggilan ini akan mengakhiri otentikasi user.
+Pemanggilan ini akan mengakhiri otentikasi user. Anda juga dapat menambahkan parameter URL pada method logout sebagai URL redirect setelah logout dari SSO.
+
+    SSO\SSO::logout('http://google.com');
 
 ### 5. Setting path untuk CAS.php
 
