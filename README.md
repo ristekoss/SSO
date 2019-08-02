@@ -35,7 +35,7 @@ Anda sekarang sudah dapat menggunakan library ini.
 
 Untuk menggunakan *library* ini secara manual (tanpa Composer), ikuti langkah berikut.
 
-1. Download *library* phpCAS dari [sini](http://downloads.jasig.org/cas-clients/php/current.tgz) dan ekstrak ke suatu tempat di project Anda, misalnya pada direktori `vendor`.
+1. Download *library* phpCAS dari [sini](https://github.com/apereo/phpCAS/archive/1.3.6.tar.gz) dan ekstrak ke suatu tempat di project Anda, misalnya pada direktori `vendor`.
 2. Download project ini sebagai zip (lihat bagian atas kanan halaman ini), ekstrak juga ke `vendor`.
 3. *Require* `SSO.php` dengan melakukan:
         
