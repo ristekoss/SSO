@@ -127,10 +127,22 @@ class SSO
       $user->npm = $details['npm'];
       $user->org_code = $details['kd_org'];
 
-      $data = json_decode(file_get_contents( __DIR__ . '/additional-info.json'), true)[$user->org_code];
-      $user->faculty = $data['faculty'];
-      $user->study_program = $data['study_program'];
-      $user->educational_program = $data['educational_program'];
+      if( !is_array($user->org_code) ) {
+	      $data = json_decode(file_get_contents( __DIR__ . '/additional-info.json'), true)[$user->org_code];
+	      $user->faculty = $data['faculty'];
+	      $user->study_program = $data['study_program'];
+	      $user->educational_program = $data['educational_program'];
+      } else {
+	      $user->faculty = array();
+	      $user->study_program = array();
+	      $user->educational_program = array();
+	      foreach( $user->org_code as $org_code ) {
+		      $data = json_decode(file_get_contents( __DIR__ . '/additional-info.json'), true)[$org_code];
+		      array_push($user->faculty, $data['faculty']);
+		      array_push($user->study_program, $data['study_program']);
+		      array_push($user->educational_program, $data['educational_program']);
+	      }
+      }
     }
     else if ($user->role === 'staff') {
       $user->nip = $details['nip'];
