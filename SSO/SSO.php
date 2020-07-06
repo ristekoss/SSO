@@ -126,21 +126,26 @@ class SSO
     if ($user->role === 'mahasiswa') {
       $user->npm = $details['npm'];
       $user->org_code = $details['kd_org'];
-
+	    
       if( !is_array($user->org_code) ) {
 	      $data = json_decode(file_get_contents( __DIR__ . '/additional-info.json'), true)[$user->org_code];
 	      $user->faculty = $data['faculty'];
 	      $user->study_program = $data['study_program'];
 	      $user->educational_program = $data['educational_program'];
       } else {
-	      $user->faculty = array();
-	      $user->study_program = array();
-	      $user->educational_program = array();
+	      $data = json_decode(file_get_contents( __DIR__ . '/additional-info.json'), true)[$user->org_code[0]];
+	      $user->faculty = $data['faculty'];
+	      $user->study_program = $data['study_program'];
+	      $user->educational_program = $data['educational_program'];
+	      
+	      $user->faculties = array();
+	      $user->study_programs = array();
+	      $user->educational_programs = array();
 	      foreach( $user->org_code as $org_code ) {
 		      $data = json_decode(file_get_contents( __DIR__ . '/additional-info.json'), true)[$org_code];
-		      array_push($user->faculty, $data['faculty']);
-		      array_push($user->study_program, $data['study_program']);
-		      array_push($user->educational_program, $data['educational_program']);
+		      array_push($user->faculties, $data['faculty']);
+		      array_push($user->study_programs, $data['study_program']);
+		      array_push($user->educational_programs, $data['educational_program']);
 	      }
       }
     }
